@@ -1,0 +1,4 @@
+/target
+/Cargo.lock
+/tests/programs/build_x86
+/tests/programs/build_x86_64

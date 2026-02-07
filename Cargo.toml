@@ -1,0 +1,32 @@
+[package]
+name = "wolpertinger"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+authors = ["Jonas Zaddach <jonas.zaddach@gmail.com>"]
+
+[features]
+capstone = ["dep:capstone"]
+default = ["capstone"]
+
+[dependencies]
+anyhow = "1.0"
+bitflags = "2.10"
+clap = { version = "4.4", features = ["derive"] }
+env_logger = "0.11"
+log = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+unicorn-engine = "2"
+goblin = "0.9"
+capstone = { version = "0.11", optional = true }
+inventory = "0.3.21"
+wolpertinger-macros = { path = "crates/wolpertinger-macros" }
+thiserror = "2.0.18"
+
+[dev-dependencies]
+assert_cmd = "2"
+predicates = "2"
+tempfile = "3"
+serde_json = "1.0"
+walkdir = "2"

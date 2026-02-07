@@ -1,0 +1,35 @@
+# Cargo Make tasks for building test programs (Windows cross-compile targets)
+# Usage:
+#  - `cargo make build-tests-64` to build tests for x86_64
+#  - `cargo make build-tests-32` to build tests for i686
+#  - `cargo make build-tests` to build both
+
+[config]
+
+
+[tasks.test]
+dependencies = ["build-tests"]
+
+[tasks.build-tests-64]
+description = "Build Windows test programs (x86_64-w64-mingw32)"
+script = [
+  "rm -rf tests/programs/build_x86_64",
+  "mkdir -p tests/programs/build_x86_64",
+  "cd tests/programs/build_x86_64",
+  "cmake -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc ..",
+  "cmake --build . --config Release"
+]
+
+[tasks.build-tests-32]
+description = "Build Windows test programs (i686-w64-mingw32)"
+script = [
+  "rm -rf tests/programs/build_x86",
+  "mkdir -p tests/programs/build_x86",
+  "cd tests/programs/build_x86",
+  "cmake -DCMAKE_C_COMPILER=i686-w64-mingw32-gcc ..",
+  "cmake --build . --config Release"
+]
+
+[tasks.build-tests]
+description = "Build both 32-bit and 64-bit test programs"
+dependencies = ["build-tests-64", "build-tests-32"]
